@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <!-- Add Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="dark-mode">
@@ -21,7 +23,7 @@
         </div>
     </div>
 
-    <!-- Mobile menu button -->
+    <!-- Mobile menu button - move outside sidebar for better positioning -->
     <button class="mobile-toggle">
         <i class="fas fa-bars"></i>
     </button>
@@ -53,13 +55,12 @@
             <div class="hero-content">
                 <div class="image-container">
                     <div class="corner-decoration top-right"></div>
-                    <img src="images/profile.jpg" alt="Profile Photo">
+                    <img src="images/profile.png" alt="Profile Photo">
                     <div class="corner-decoration bottom-left"></div>
                 </div>
                 <div class="text-content">
-                    <h2>Hello, my name is <span class="highlight underline">Muhammad Haroon</span></h2>
-                    <h3>I'm an <span class="highlight" style="font-family: cursive;">Aspiring</span> <span
-                            class="highlight underline">Gen AI Specialist</span></h3>
+                    <h2>Hello, my name is <span class="highlight svg-underline">Muhammad Haroon</span></h2>
+                    <h3>I'm an <span class="highlight" style="font-family: cursive;">Aspiring</span> <span class="highlight svg-underline">Gen AI Specialist</span></h3>
                     <p>I'm passionate about developing intelligent systems that solve real-world problems. My expertise
                         includes machine learning, deep learning, and natural language processing.</p>
                     <a href="https://drive.google.com/uc?export=download&id=14RCPnd6zXaMvjXuqqv3g9JzvqYcOwLP5" download
@@ -73,38 +74,88 @@
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I'm an aspiring Generative AI specialist currently strengthening my foundation in mathematics,
-                        statistics, and programming. As I continue learning, I’m deeply curious about how generative
-                        models can be developed and applied in ethical, transparent, and accessible ways.</p>
-                    <p>I'm exploring both the theoretical and practical aspects of GenAI—focusing on building creative,
-                        responsible, and impactful systems. Whether it's generating text, images, or other media, my
-                        goal is to use these tools to solve real problems while addressing challenges like bias,
-                        fairness, and interpretability.</p>
+                    <p>I'm an aspiring Generative AI specialist with a strong foundation in mathematics, statistics, and programming. My passion lies in developing creative, responsible, and impactful AI systems that solve real-world problems while addressing challenges like bias, fairness, and interpretability. Whether it's generating text, images, or other media, I'm committed to building ethical and accessible AI solutions that make a positive difference.</p>
 
                     <div class="skills">
                         <h3>My Skills</h3>
-                        <div class="skill-item">
-                            <span>Machine Learning</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
+                        <div class="hexagon-grid">
+                            <div class="hexagon-item">
+                                <div class="hexagon-content">
+                                    <i class="fas fa-brain"></i>
+                                    <h4>Machine Learning</h4>
+                                    <div class="skill-level">
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Python</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
+                            <div class="hexagon-item">
+                                <div class="hexagon-content">
+                                    <i class="fab fa-python"></i>
+                                    <h4>Python</h4>
+                                    <div class="skill-level">
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Natural Language Processing</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
+                            <div class="hexagon-item">
+                                <div class="hexagon-content">
+                                    <i class="fas fa-comment-dots"></i>
+                                    <h4>NLP</h4>
+                                    <div class="skill-level">
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot"></span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Streamlit</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%"></div>
+                            <div class="hexagon-item">
+                                <div class="hexagon-content">
+                                    <i class="fas fa-chart-line"></i>
+                                    <h4>Data Analysis</h4>
+                                    <div class="skill-level">
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hexagon-item">
+                                <div class="hexagon-content">
+                                    <i class="fas fa-desktop"></i>
+                                    <h4>Streamlit</h4>
+                                    <div class="skill-level">
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hexagon-item">
+                                <div class="hexagon-content">
+                                    <i class="fas fa-robot"></i>
+                                    <h4>AI Development</h4>
+                                    <div class="skill-level">
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot active"></span>
+                                        <span class="level-dot"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -114,69 +165,128 @@
 
         <section id="services" class="section">
             <h2 class="section-title">My Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Churn Prediction</h3>
-                    <p>Develop advanced models to identify at-risk customers and provide actionable retention
-                        strategies.</p>
+            <div class="services-container">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Churn Prediction</h3>
+                        <p>Develop advanced models to identify at-risk customers and provide actionable retention strategies.</p>
+                        <div class="service-tags">
+                            <span>Customer Analysis</span>
+                            <span>Predictive Modeling</span>
+                            <span>Retention Strategy</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-sitemap"></i>
-                    <h3>Classification Models</h3>
-                    <p>Create custom classification solutions for complex data problems with high accuracy and
-                        interpretability.</p>
+                
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Classification Models</h3>
+                        <p>Create custom classification solutions for complex data problems with high accuracy and interpretability.</p>
+                        <div class="service-tags">
+                            <span>Feature Engineering</span>
+                            <span>Model Tuning</span>
+                            <span>Explainable AI</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-desktop"></i>
-                    <h3>Streamlit Web Apps</h3>
-                    <p>Build interactive, data-driven web applications that make your AI models accessible to
-                        non-technical users.</p>
+                
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Streamlit Web Apps</h3>
+                        <p>Build interactive, data-driven web applications that make your AI models accessible to non-technical users.</p>
+                        <div class="service-tags">
+                            <span>UI/UX Design</span>
+                            <span>Data Visualization</span>
+                            <span>Cloud Deployment</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-robot"></i>
-                    <h3>Predictive AI Bots</h3>
-                    <p>Develop intelligent chatbots and virtual assistants that leverage predictive analytics to enhance
-                        user experience.</p>
+                
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Predictive AI Bots</h3>
+                        <p>Develop intelligent chatbots and virtual assistants that leverage predictive analytics to enhance user experience.</p>
+                        <div class="service-tags">
+                            <span>NLP Integration</span>
+                            <span>Conversational Design</span>
+                            <span>Learning Systems</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="portfolio" class="section">
             <h2 class="section-title">My Projects</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1554768804-50c1e2b50a6e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt="Project 1">
-                    <div class="portfolio-overlay">
+            <div class="projects-container">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/salary.png" alt="Salary Prediction">
+                        <div class="project-badge">ML</div>
+                    </div>
+                    <div class="project-content">
                         <h3>Salary Prediction Model</h3>
-                        <div class="portfolio-buttons">
-                            <a href="https://salary-prediction-1234.streamlit.app/" target="_blank"
-                                class="btn-small">View Project</a>
-                            <a href="https://github.com/mharoon1578/salary-prediction" target="_blank"
-                                class="btn-small btn-github"><i class="fab fa-github"></i> View Code</a>
+                        <p>An advanced machine learning model that predicts salary based on experience, education, and industry factors.</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>Scikit-learn</span>
+                            <span>Streamlit</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://salary-prediction-123.streamlit.app/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            <a href="https://github.com/mharoon1578/salary-prediction" target="_blank" class="project-link"><i class="fab fa-github"></i> Source Code</a>
                         </div>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1576765915649-b6f4be4ec5c8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt="Project 2">
-                    <div class="portfolio-overlay">
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/churn.png" alt="Churn Prediction">
+                        <div class="project-badge">AI</div>
+                    </div>
+                    <div class="project-content">
                         <h3>Bank Churn Prediction Model</h3>
-                        <div class="portfolio-buttons">
-                            <a href="https://churn-prediction-123.streamlit.app/" target="_blank" class="btn-small">View Project</a>
-                            <a href="https://github.com/mharoon1578/churn-prediction" target="_blank" class="btn-small btn-github"><i class="fab fa-github"></i> View Code</a>
+                        <p>A predictive model that identifies customers at risk of leaving a bank, enabling proactive retention strategies.</p>
+                        <div class="project-tech">
+                            <span>TensorFlow</span>
+                            <span>Pandas</span>
+                            <span>Flask</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://churn-prediction-123.streamlit.app/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            <a href="https://github.com/mharoon1578/churn-prediction" target="_blank" class="project-link"><i class="fab fa-github"></i> Source Code</a>
                         </div>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1476&q=80"
-                        alt="Project 3">
-                    <div class="portfolio-overlay">
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1476&q=80" alt="Analytics Dashboard">
+                        <div class="project-badge">Data</div>
+                    </div>
+                    <div class="project-content">
                         <h3>Predictive Analytics Dashboard</h3>
-                        <div class="portfolio-buttons">
-                            <a href="#" class="btn-small">View Project</a>
-                            <a href="#" class="btn-small btn-github"><i class="fab fa-github"></i> View Code</a>
+                        <p>An interactive dashboard that visualizes complex data patterns and provides predictive insights for business decisions.</p>
+                        <div class="project-tech">
+                            <span>Plotly</span>
+                            <span>Dash</span>
+                            <span>SQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
                         </div>
                     </div>
                 </div>
@@ -242,15 +352,15 @@
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <p>mharoon1578@gmail.com</p>
+                        <p><a href="mailto:mharoon.contact@gmail.com" class="link">mharoon.contact@gmail.com</a></p>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
-                        <p>+92 342 3520915</p>
+                        <p><a href="tel:+92 342 3520915" class="link">+92 342 3520915</a></p>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <p>Tecrix, Sargodha, Pakistan</p>
+                        <p><a href="https://www.google.com/maps/place/Tecrix/@32.183215,73.021948,10z/data=!4m6!3m5!1s0x3921930051f89f17:0xb6a4d030ea9fb3ff!8m2!3d32.1832148!4d73.0219484!16s%2Fg%2F11wqj5kxr8?hl=en-US&entry=ttu&g_ep=EgoyMDI1MDQzMC4xIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D" class="link" target="_blank">Tecrix, Sargodha, Pakistan</a></p>
                     </div>
 
                     <!-- Availability Box -->
@@ -290,6 +400,3 @@
 </body>
 
 </html>
-
-
-
