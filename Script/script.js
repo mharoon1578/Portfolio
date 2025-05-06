@@ -58,36 +58,109 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000); // 5 second fallback
     }
     
-    // Mobile navigation toggle
+    // Enhanced mobile navigation handling
     const mobileToggle = document.querySelector('.mobile-toggle');
     const sidebar = document.querySelector('.sidebar');
-    
+    const mainContent = document.querySelector('main');
+    const body = document.body;
+
     if (mobileToggle) {
-        mobileToggle.addEventListener('click', function() {
+        mobileToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
             sidebar.classList.toggle('active');
+            
+            // Prevent body scrolling when sidebar is open
+            if (sidebar.classList.contains('active')) {
+                body.style.overflow = 'hidden';
+            } else {
+                body.style.overflow = '';
+            }
         });
     }
-    
-    // Close sidebar when clicking outside of it
-    document.addEventListener('click', function(event) {
-        const isClickInsideSidebar = sidebar.contains(event.target);
-        const isClickOnToggle = mobileToggle.contains(event.target);
-        
-        if (!isClickInsideSidebar && !isClickOnToggle && sidebar.classList.contains('active')) {
-            sidebar.classList.remove('active');
-        }
-    });
-    
+
+    // Close sidebar when clicking on main content
+    if (mainContent) {
+        mainContent.addEventListener('click', function() {
+            if (window.innerWidth <= 768 && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+                body.style.overflow = '';
+            }
+        });
+    }
+
+    // Prevent clicks inside sidebar from closing it
+    if (sidebar) {
+        sidebar.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+
     // Close sidebar when clicking on a link (mobile)
     const navLinks = document.querySelectorAll('nav ul li a');
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
             if (window.innerWidth <= 768) {
                 sidebar.classList.remove('active');
+                body.style.overflow = '';
+                
+                // Smooth scroll to section
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    // Add small delay to allow sidebar to close first
+                    setTimeout(() => {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }, 300);
+                }
             }
         });
     });
     
+    // Fix for section heights on mobile
+    function adjustSectionHeights() {
+        if (window.innerWidth <= 768) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.style.minHeight = 'auto';
+            });
+        }
+    }
+    
+    // Run on load and resize
+    adjustSectionHeights();
+    window.addEventListener('resize', adjustSectionHeights);
+
+    // Fix for portfolio details display
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    const portfolioDetails = document.querySelectorAll('.portfolio-details');
+
+    if (portfolioItems.length > 0 && portfolioDetails.length > 0) {
+        portfolioItems.forEach((item, index) => {
+            item.addEventListener('click', function() {
+                // Hide all details first
+                portfolioDetails.forEach(detail => {
+                    detail.classList.remove('active');
+                });
+                
+                // Show the corresponding detail
+                if (portfolioDetails[index]) {
+                    portfolioDetails[index].classList.add('active');
+                }
+            });
+        });
+        
+        // Close buttons for portfolio details
+        const closeButtons = document.querySelectorAll('.close-details');
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                portfolioDetails.forEach(detail => {
+                    detail.classList.remove('active');
+                });
+            });
+        });
+    }
+
     // Active navigation highlighting based on scroll position
     function highlightNavigation() {
         let scrollPosition = window.scrollY;
@@ -102,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                 // Remove active class from all links
-                navLinks.forEach(link => {
+                document.querySelectorAll('nav ul li a').forEach(link => {
                     link.classList.remove('active');
                 });
                 
@@ -121,22 +194,39 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update active link on scroll
     window.addEventListener('scroll', highlightNavigation);
     
-    // Simple skill bar animation
-    const skillBars = document.querySelectorAll('.skill-progress');
-    
-    function animateSkills() {
-        skillBars.forEach(bar => {
-            const width = bar.getAttribute('style').split(':')[1].trim();
-            bar.style.width = '0';
-            setTimeout(() => {
-                bar.style.width = width;
-                bar.style.transition = 'width 1s ease-in-out';
-            }, 500);
+    // Initialize circular progress bars
+    function initSkillCircles() {
+        const circles = document.querySelectorAll('.progress-circle');
+        
+        circles.forEach(circle => {
+            const percentage = circle.getAttribute('data-percentage');
+            const radius = circle.querySelector('.progress-ring-circle').getAttribute('r');
+            const circumference = 2 * Math.PI * radius;
+            
+            // Set the stroke-dasharray and stroke-dashoffset
+            const progressCircle = circle.querySelector('.progress-ring-circle');
+            progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+            progressCircle.style.strokeDashoffset = circumference;
+            
+            // Animate when in viewport
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            const offset = circumference - (percentage / 100) * circumference;
+                            progressCircle.style.strokeDashoffset = offset;
+                        }, 300);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            observer.observe(circle);
         });
     }
-    
-    // Animate skills when page loads
-    setTimeout(animateSkills, 1000);
+
+    // Call the function when DOM is loaded
+    initSkillCircles();
 });
 
 // Add Formspree form handling with custom success message
@@ -247,7 +337,7 @@ function initTestimonialsSlider() {
     });
     
     let position = 0;
-    let speed = 0.5; // pixels per frame - constant speed
+    let speed = .8; // pixels per frame - constant speed
     let animationId;
     
     // Function to animate the slider at constant speed
@@ -286,5 +376,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize testimonials slider
     initTestimonialsSlider();
 });
-
-
